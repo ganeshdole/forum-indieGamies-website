@@ -1,5 +1,6 @@
 import React from 'react';
 import { Github, Twitter, Facebook, Instagram } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
     return (
@@ -53,21 +54,21 @@ const Footer = () => {
 
 const FooterLink = ({ href, text }) => (
     <li>
-        <a href={href} className="hover:text-white transition-colors duration-300">
+        <Link to={href} className="hover:text-white transition-colors duration-300">
             {text}
-        </a>
+        </Link>
     </li>
 );
 
 const SocialIcon = ({ Icon, href }) => (
-    <a
-        href={href}
+    <Link
+        to={href}
         target="_blank"
         rel="noopener noreferrer"
         className="text-gray-400 hover:text-white transition-colors duration-300"
     >
         <Icon size={24} />
-    </a>
+    </Link>
 );
 
 export default Footer;
