@@ -5,7 +5,7 @@ import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import { store, persistor } from './store/Store.jsx'
 import { BrowserRouter } from 'react-router-dom'
-import ScrollToTop from "@ganeshdole/scrollToTop"
+import ScrollToTop from "./utils/ScrollToTop.jsx"
 import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
