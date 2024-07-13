@@ -1,4 +1,4 @@
-const SERVERURL = 'http://localhost:4000'
+const SERVERURL = import.meta.env.VITE_SERVERURL
 
 
 export function createUrl(path){
