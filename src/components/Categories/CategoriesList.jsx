@@ -41,9 +41,9 @@ const CategoriesList = () => {
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     {categories.map((category) => (
-                        <Link to={`/category/${category._id}`}>
+                        <Link to={`/category/${category._id}`} key={category._id}>
                             <div
-                                key={category._id}
+
                                 className="bg-gray-800 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 flex"
                             >
                                 <div className="bg-indigo-500 p-6 flex items-center justify-center">

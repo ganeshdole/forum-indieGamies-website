@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { getCategoryById } from "../services/categories";
 import CategoriesPageHero from "../components/Categories/CategoriesPageHero";
 import CategoriesThread from "../components/Categories/CategoriesThread";
-import { Plus, RefreshCw } from 'lucide-react';
+import { Plus, RefreshCw, Loader } from 'lucide-react';
 
 const Categories = () => {
     const { categoryId } = useParams();
@@ -40,7 +40,11 @@ const Categories = () => {
     };
 
     if (isLoading) {
-        return <div className="flex justify-center items-center h-screen bg-gray-900 text-white">Loading...</div>;
+        return (
+            <div className="flex justify-center items-center h-64">
+                <Loader className="animate-spin text-indigo-600" size={48} />
+            </div>
+        )
     }
 
     return (

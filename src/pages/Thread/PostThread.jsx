@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Send, X } from 'lucide-react';
 import { createThread } from '../../services/threads';
 import { useSelector } from 'react-redux';
-
+import { toast } from 'react-toastify';
 
 const categories = [
     {
@@ -60,14 +60,14 @@ function PostThread() {
             setIsLoading(true);
             const result = await createThread(threadData, token);
             if (result.status === 'success') {
-                alert('Thread created successfully');
+                toast.success('Thread created successfully');
                 navigate(-1);
             } else {
                 throw new Error('Failed to create thread');
             }
         } catch (error) {
             console.error('Error creating thread:', error);
-            alert('Failed to create thread. Please try again.');
+            toast.error('Failed to create thread. Please try again.');
         } finally {
             setIsLoading(false);
         }

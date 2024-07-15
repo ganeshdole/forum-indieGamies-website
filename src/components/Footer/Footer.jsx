@@ -11,10 +11,10 @@ const Footer = () => {
                         <h2 className="text-3xl font-bold text-white">IndieGamie</h2>
                         <p>Connecting game developers worldwide.</p>
                         <div className="flex space-x-4">
-                            <SocialIcon Icon={Github} href="https://github.com/indiegamie" />
-                            <SocialIcon Icon={Twitter} href="https://twitter.com/indiegamie" />
-                            <SocialIcon Icon={Facebook} href="https://facebook.com/indiegamie" />
-                            <SocialIcon Icon={Instagram} href="https://instagram.com/indiegamie" />
+                            <SocialIcon Icon={Github} href="https://github.com/ganeshdole" />
+                            <SocialIcon Icon={Twitter} href="https://x.com/indieGamies" />
+                            {/* <SocialIcon Icon={Facebook} href="https://facebook.com/indiegamie" /> */}
+                            {/* <SocialIcon Icon={Instagram} href="https://instagram.com/indiegamie" /> */}
                         </div>
                     </div>
                     <div>
@@ -29,15 +29,15 @@ const Footer = () => {
                     <div>
                         <h3 className="text-xl font-semibold mb-4 text-white">Newsletter</h3>
                         <p>Stay updated with the latest in indie game development.</p>
-                        <form className="flex mt-4 md:flex-col lg:flex-row">
+                        <form className="flex mt-4 flex-col lg:flex-row gap-1 lg:gap-0">
                             <input
                                 type="email"
                                 placeholder="Enter your email"
-                                className="flex-grow px-4 py-2 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-900"
+                                className="flex-grow px-4 py-2 rounded-lg lg:rounded-l-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-900 w-full "
                             />
                             <button
                                 type="submit"
-                                className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-r-lg transition-colors duration-300 "
+                                className="bg-indigo-600 rounded-lg hover:bg-indigo-700 text-white px-4 py-2 lg:rounded-r-lg transition-colors duration-300 "
                             >
                                 Subscribe
                             </button>

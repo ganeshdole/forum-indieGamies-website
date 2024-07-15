@@ -3,24 +3,27 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { loginUser } from '../services/user';
 import { addToken } from '../feature/authSlice';
-import { LogIn, ArrowLeft } from 'lucide-react';
+import { LogIn, ArrowLeft, Mail, Lock, Eye, EyeOff } from 'lucide-react';
+import { toast } from 'react-toastify';
+
 
 const Signin = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         const userData = { email, password };
         const user = await loginUser(userData);
         if (user.status === "success") {
-            alert("User signed in successfully");
+            toast.success("User signed in successfully");
             dispatch(addToken(user.data.token));
             navigate("/");
         } else {
-            alert(user.error);
+            toast.error(user.error);
         }
     }
 
@@ -42,28 +45,42 @@ const Signin = () => {
                         <label className="block text-gray-300 text-sm font-semibold mb-2" htmlFor="email">
                             Email
                         </label>
-                        <input
-                            className="w-full px-4 py-3 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition text-white"
-                            id="email"
-                            type="email"
-                            placeholder="Enter your email"
-                            aria-label="Email"
-                            onChange={(e) => setEmail(e.target.value)}
-                        />
+                        <div className='relative'>
+                            <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" size={18} />
+                            <input
+                                className="w-full pl-10 pr-4 py-3 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition text-white"
+                                id="email"
+                                type="email"
+                                placeholder="Enter your email"
+                                aria-label="Email"
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
+                        </div>
                     </div>
                     <div>
                         <label className="block text-gray-300 text-sm font-semibold mb-2" htmlFor="password">
                             Password
                         </label>
-                        <input
-                            className="w-full px-4 py-3 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition text-white"
-                            id="password"
-                            type="password"
-                            placeholder="Enter your password"
-                            aria-label="Password"
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
+                        <div className='relative'>
+                            <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" size={18} />
+                            <input
+                                className="w-full pl-10 pr-4 py-3 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition text-white"
+                                id="password"
+                                type={showPassword ? "text" : "password"}
+                                placeholder="Enter your password"
+                                aria-label="Password"
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
+                            <button
+                                type="button"
+                                onClick={() => setShowPassword(!showPassword)}
+                                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-300 focus:outline-none"
+                            >
+                                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                            </button>
+                        </div>
                     </div>
+
                     <div className="flex items-center justify-end">
                         <div className="text-sm">
                             <Link to="/forgot-password" className="font-medium text-indigo-400 hover:text-indigo-300">

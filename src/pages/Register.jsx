@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { createUser } from '../services/user';
 import { UserPlus, ArrowLeft, Mail, Lock, User, Check, Eye, EyeOff } from 'lucide-react';
 import { requestOtp, verifyOtp } from '../services/auth';
+import { toast } from 'react-toastify';
 
 const Register = () => {
     const navigate = useNavigate();
@@ -44,14 +45,20 @@ const Register = () => {
         });
 
         if (newUser.status === "success") {
-            alert("User created successfully");
+            toast.success("User created successfully");
             navigate("/login");
         } else {
             setError(newUser.error);
+            setTimeout(clearError, 1000)
         }
     };
 
+    const clearError = () => {
+        setError()
+    }
+
     const handleSendOtp = async () => {
+        console.log("Button clicked")
         const email = formData.email;
         const result = await requestOtp(email);
         if (result.status === "success") {
@@ -145,11 +152,14 @@ const Register = () => {
                                 <button
                                     type="button"
                                     onClick={handleSendOtp}
-                                    disabled={isEmailSent}
-                                    className={`px-4 py-2 rounded-lg font-semibold text-sm transition-colors duration-200 ${isEmailSent
-                                        ? 'bg-green-500 text-white cursor-not-allowed'
-                                        : 'bg-indigo-600 text-white hover:bg-indigo-700'
-                                        } w-fit`}
+                                    disabled={!formData.email}
+                                    className={`
+                                        px-4 py-2 rounded-lg font-semibold text-sm transition-colors duration-200 ${isEmailSent ? 'bg-green-500 text-white cursor-not-allowed'
+                                            : 'bg-indigo-600 text-white hover:bg-indigo-700'
+                                        } w-fit 
+                                          ${!formData.email ? "cursor-not-allowed" : "cursor-pointer"}
+                                        `
+                                    }
                                 >
                                     {isEmailSent ? 'OTP Sent' : 'Send OTP'}
                                 </button>
@@ -161,7 +171,7 @@ const Register = () => {
                             <label htmlFor="otp" className="block text-gray-300 text-sm font-semibold">
                                 Enter OTP
                             </label>
-                            <div className="flex space-x-2">
+                            <div className="grid grid-cols-2 gap-2">
                                 <input
                                     id="otp"
                                     type="text"

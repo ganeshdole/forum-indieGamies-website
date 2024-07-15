@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { Loader } from "lucide-react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getThreadById, updateThread } from "../../services/threads";
 import { getCategoryById } from "../../services/categories";
 import { getRepliesByThreadId, createReply } from "../../services/replies";
+import { toast } from "react-toastify";
 
 const Threads = () => {
     const token = useSelector(state => state.authentication.token);
@@ -37,6 +39,7 @@ const Threads = () => {
             });
         } catch (err) {
             setError(err.message);
+            toast.error(err.message);
         } finally {
             setLoading(false);
         }
@@ -49,7 +52,7 @@ const Threads = () => {
     const handleReplySubmit = async (e) => {
         e.preventDefault();
         if (!replyContent.trim()) {
-            setError("Reply content cannot be empty");
+            toast.error("Reply content cannot be empty");
             return;
         }
 
@@ -68,28 +71,17 @@ const Threads = () => {
                     ...prevThread,
                     replies: (prevThread.replies || 0) + 1
                 }));
-                setError(null);
+                toast.success("Reply submitted successfully");
             }
         } catch (err) {
-            setError("Failed to submit reply: " + err.message);
+            toast.error("Failed to submit reply: " + err.message);
         }
     };
 
     if (loading) {
         return (
-            <div className="flex justify-center items-center h-screen bg-gray-900">
-                <div className="text-white text-xl">Loading thread...</div>
-            </div>
-        );
-    }
-
-    if (error) {
-        return (
-            <div className="flex justify-center items-center h-screen bg-gray-900">
-                <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-md" role="alert">
-                    <strong className="font-bold">Error:</strong>
-                    <span className="block sm:inline"> {error}</span>
-                </div>
+            <div className="flex justify-center items-center h-64">
+                <Loader className="animate-spin text-indigo-600" size={48} />
             </div>
         );
     }
@@ -136,10 +128,7 @@ const Threads = () => {
                 {/* Reply Button */}
                 <div className="mb-8">
                     <button
-                        onClick={() => {
-                            setShowReplyForm(!showReplyForm);
-                            setError(null); // Reset error state when toggling reply form
-                        }}
+                        onClick={() => setShowReplyForm(!showReplyForm)}
                         className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
                     >
                         {showReplyForm ? "Cancel Reply" : "Reply to Thread"}
@@ -174,8 +163,6 @@ const Threads = () => {
                             <div key={reply._id} className="bg-gray-800 rounded-lg p-6">
                                 <p className="text-gray-200 mb-4">{reply.content}</p>
                                 <div className="text-sm text-gray-500">
-                                    {/* <span>Upvotes: {reply.upvotes}</span> */}
-                                    {/* <span className="mx-2">•</span> */}
                                     <span>{new Date(reply.date).toLocaleString()}</span>
                                 </div>
                             </div>
