@@ -3,7 +3,6 @@ import { createError, createUrl } from "./utils";
 
 export const requestOtp = async (email) => {
     try {
-        console.log(email)
         const body = {
             email
         }
