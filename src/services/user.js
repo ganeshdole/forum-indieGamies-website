@@ -25,3 +25,18 @@ export async function loginUser(user) {
     }
 }
 
+
+export async function updateUser(user, token){
+   try{
+    console.log(token)
+    const body = user;
+    const headers = {
+        token: token
+    }
+    const result = await axios.patch(createUrl("user/update"), body, {headers})
+    return result.data;
+   }catch(error){
+    console.log(error);
+    return createError(error);
+   }
+}

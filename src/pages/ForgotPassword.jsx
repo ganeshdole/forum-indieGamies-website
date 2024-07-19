@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { ArrowLeft, Mail, Send, Check, Lock, Eye, EyeOff } from 'lucide-react';
 import { toast } from 'react-toastify';
-import { requestOtp, verifyOtp } from '../services/auth';
+import { requestOtp, verifyOtp } from "../services/forgortPassword";
+import { updateUser } from "../services/user"
+
 
 const ForgotPassword = () => {
     const navigate = useNavigate();
@@ -11,7 +13,8 @@ const ForgotPassword = () => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
-    const [step, setStep] = useState('email'); // 'email', 'otp', or 'password'
+    const [step, setStep] = useState('email'); 
+    const [tempToken, setTempToken] = useState(null);
 
     const handleSendOtp = async (e) => {
         e.preventDefault();
@@ -27,7 +30,9 @@ const ForgotPassword = () => {
     const handleVerifyOtp = async (e) => {
         e.preventDefault();
         const result = await verifyOtp(email, otp);
+        console.log(result);
         if (result.status === "success") {
+            setTempToken(result.data.token);
             toast.success("OTP verified successfully");
             setStep('password');
         } else {
@@ -41,10 +46,13 @@ const ForgotPassword = () => {
             toast.error("Passwords do not match");
             return;
         }
-        const result = await resetPassword(email, password, otp);
+        const user = {
+            password
+        }
+        const result = await updateUser(user, tempToken);
         if (result.status === "success") {
             toast.success("Password reset successfully");
-            navigate('/signin');
+            navigate('/login');
         } else {
             toast.error(result.error);
         }
@@ -53,7 +61,7 @@ const ForgotPassword = () => {
     return (
         <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-800 to-gray-900 p-4 relative">
             <button
-                onClick={() => navigate("/signin")}
+                onClick={() => navigate("/login")}
                 className="absolute top-4 left-4 flex items-center text-gray-300 hover:text-white transition-colors duration-200"
             >
                 <ArrowLeft className="mr-2" size={20} />
@@ -188,7 +196,7 @@ const ForgotPassword = () => {
                 </form>
                 <p className="mt-8 text-center text-gray-400">
                     Remember your password?{' '}
-                    <Link to="/signin" className="font-semibold text-indigo-400 hover:text-indigo-300 transition">
+                    <Link to="/login" className="font-semibold text-indigo-400 hover:text-indigo-300 transition">
                         Sign in
                     </Link>
                 </p>
