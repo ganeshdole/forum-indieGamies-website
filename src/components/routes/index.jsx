@@ -9,6 +9,7 @@ import NotFound from "../../pages/NotFound";
 import PostThread from "../../pages/Thread/PostThread";
 import About from "../../pages/About";
 import Contact from "../../pages/Contact";
+import ForgotPassword from "../../pages/ForgotPassword";
 
 const MainRoutes = () => {
   const routes = useRoutes([
@@ -38,6 +39,10 @@ const MainRoutes = () => {
       path: "/login",
       element: <Login />,
     },
+    {
+      path: "/forgot-password",
+      element: <ForgotPassword />
+    }
   ]);
   return routes;
 };
