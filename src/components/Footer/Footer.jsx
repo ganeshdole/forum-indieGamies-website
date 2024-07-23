@@ -1,5 +1,5 @@
 import React from 'react';
-import { Github, Twitter, Facebook, Instagram } from 'lucide-react';
+import { Github, Twitter } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Footer = () => {
@@ -13,8 +13,6 @@ const Footer = () => {
                         <div className="flex space-x-4">
                             <SocialIcon Icon={Github} href="https://github.com/ganeshdole" />
                             <SocialIcon Icon={Twitter} href="https://x.com/indieGamies" />
-                            {/* <SocialIcon Icon={Facebook} href="https://facebook.com/indiegamie" /> */}
-                            {/* <SocialIcon Icon={Instagram} href="https://instagram.com/indiegamie" /> */}
                         </div>
                     </div>
                     <div>
