@@ -3,9 +3,11 @@ import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, 
 import storage from 'redux-persist/lib/storage';
 import { combineReducers } from 'redux';
 import authReducer from '../feature/authSlice';
+import userReducer from '../feature/userSlice'
 
 const rootReducer = combineReducers({
     authentication: authReducer,
+    user : userReducer
 });
 
 const persistConfig = {

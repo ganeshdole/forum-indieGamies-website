@@ -1,6 +1,5 @@
 import axios  from "axios";
 import { createError, createUrl } from "./utils";
-import {useSelector } from "react-redux";
 
 
 
@@ -11,7 +10,7 @@ export async function getRepliesByThreadId(threadID){
         return result.data
     }
     catch(error){
-        console.log('Error fetching Replies', error.message)
+        console.log('Error fetching Replies', error.message);
         throw createError(error);
     }
 }
@@ -25,7 +24,23 @@ export async function createReply(reply,token){
         const result = await axios.post(url, reply, {headers});
         return result.data;
     }catch(error){
-        console.log('Error creating Reply', error.message)
+        console.log('Error creating Reply', error.message);
+        throw createError(error);
+    }
+}
+
+
+export async function deleteReply(replyId, token){
+    try{
+        const headers = {
+            token 
+        }
+        console.log(token)
+        const url = createUrl(`replies/delete/${replyId}`);
+        const result = await axios.delete(url, {headers})
+        return result.data
+    }catch(error){
+        console.log("Error deleting Reply", error.message);
         throw createError(error);
     }
 }

@@ -5,6 +5,7 @@ import { loginUser } from '../services/user';
 import { addToken } from '../feature/authSlice';
 import { LogIn, ArrowLeft, Mail, Lock, Eye, EyeOff } from 'lucide-react';
 import { toast } from 'react-toastify';
+import { addUser } from '../feature/userSlice';
 
 
 const Signin = () => {
@@ -20,6 +21,7 @@ const Signin = () => {
         const user = await loginUser(userData);
         if (user.status === "success") {
             toast.success("User signed in successfully");
+            dispatch(addUser(user.data.userId));
             dispatch(addToken(user.data.token));
             navigate("/");
         } else {
