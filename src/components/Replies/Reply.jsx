@@ -21,7 +21,7 @@ const ReplyComponent = ({ reply, onDelete }) => {
         const result = await deleteReply(reply._id, token);
         if (result.status === "success") {
             toast.success(result.data);
-            onDelete(reply._id);
+            onDelete()
         } else {
             toast.error(result.error);
         }

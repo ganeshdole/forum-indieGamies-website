@@ -24,16 +24,21 @@ const RepliesSection = ({ threadId, onRepliesUpdate }) => {
     fetchReplies();
   }, [threadId]);
 
+  function onDelete(){
+    fetchReplies();
+  }
+
   if (loading) {
     return <div className="text-white">Loading replies...</div>;
   }
+
 
   return (
     <div className="space-y-6">
       <h2 className="text-2xl font-semibold mb-4">Replies:</h2>
       {replies.length > 0 ? (
         replies.map(reply => (
-          <ReplyComponent key={reply._id} reply={reply} />
+          <ReplyComponent key={reply._id} reply={reply} onDelete={onDelete}/>
         ))
       ) : (
         <div className="bg-gray-800 rounded-lg p-6">
