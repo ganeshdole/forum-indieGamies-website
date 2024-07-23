@@ -6,7 +6,8 @@ import { toast } from 'react-toastify';
 const ReplyForm = ({ threadId, onReplySubmitted, onCancel }) => {
     const [replyContent, setReplyContent] = useState('');
     const token = useSelector(state => state.authentication.token);
-
+    const [showReplyForm, setShowReplyForm] = useState(false);
+    
     const handleSubmit = async (event) => {
         event.preventDefault();
         if (replyContent.trim()) {

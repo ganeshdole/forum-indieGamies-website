@@ -6,7 +6,6 @@ import { getThreadById, updateThread } from "../../services/threads";
 import { getCategoryById } from "../../services/categories";
 import { toast } from "react-toastify";
 import RepliesSection from "../../components/Replies/RepliesSection";
-import ReplyForm from "../../components/Replies/ReplyForm";
 
 const Threads = () => {
     const token = useSelector(state => state.authentication.token);
@@ -15,7 +14,6 @@ const Threads = () => {
     const [category, setCategory] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [showReplyForm, setShowReplyForm] = useState(false);
 
     const fetchThreadData = async () => {
         try {
@@ -42,14 +40,6 @@ const Threads = () => {
     useEffect(() => {
         fetchThreadData();
     }, [threadId]);
-
-    const handleReplySubmitted = (newReply) => {
-        setShowReplyForm(false);
-        setThread(prevThread => ({
-            ...prevThread,
-            replies: (prevThread.replies || 0) + 1
-        }));
-    };
 
     const handleRepliesUpdate = (replyCount) => {
         setThread(prevThread => ({
@@ -105,24 +95,6 @@ const Threads = () => {
                     </p>
                 </div>
 
-                {/* Reply Button */}
-                {!showReplyForm && <div className="mb-8">
-                    <button
-                        onClick={() => setShowReplyForm(!showReplyForm)}
-                        className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
-                    >
-                    Reply to Thread
-                    </button>
-                </div>}
-
-                {/* Reply Form */}
-                {showReplyForm && (
-                    <ReplyForm
-                        threadId={threadId}
-                        onReplySubmitted={handleReplySubmitted}
-                        onCancel={() => setShowReplyForm(false)}
-                    />
-                )}
                 {/* Replies */}
                 <RepliesSection threadId={threadId} onRepliesUpdate={handleRepliesUpdate} />
             </div>

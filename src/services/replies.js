@@ -35,7 +35,6 @@ export async function deleteReply(replyId, token){
         const headers = {
             token 
         }
-        console.log(token)
         const url = createUrl(`replies/delete/${replyId}`);
         const result = await axios.delete(url, {headers})
         return result.data
