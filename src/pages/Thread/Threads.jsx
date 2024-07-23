@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Loader } from "lucide-react";
-import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getThreadById, updateThread } from "../../services/threads";
 import { getCategoryById } from "../../services/categories";
@@ -8,12 +7,10 @@ import { toast } from "react-toastify";
 import RepliesSection from "../../components/Replies/RepliesSection";
 
 const Threads = () => {
-    const token = useSelector(state => state.authentication.token);
     const { threadId } = useParams();
     const [thread, setThread] = useState(null);
     const [category, setCategory] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
 
     const fetchThreadData = async () => {
         try {
@@ -30,7 +27,6 @@ const Threads = () => {
                 views: (threadResult.views || 0) + 1
             });
         } catch (err) {
-            setError(err.message);
             toast.error("Failed to fetch thread data: " + err.message);
         } finally {
             setLoading(false);
