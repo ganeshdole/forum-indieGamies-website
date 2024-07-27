@@ -59,3 +59,17 @@ export async function updateThread(threadId, newThread){
     }
 }
 
+export async function deleteThread(threadId, token){
+    try{
+        const headers = {
+            token 
+        }
+        console.log(token)
+        const result = await axios.delete(createUrl(`threads/delete/${threadId}`), {headers})
+        console.log(result.data)
+        return result.data
+    }catch(error){
+        console.log(error)
+        return createError(error);
+    }
+}
