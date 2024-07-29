@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 
 import RepliesSection from "../../components/Replies/RepliesSection";
 
-const Threads = () => {
+const Thread = () => {
     const token = useSelector(state => state.authentication.token);
     const userId = useSelector(state => state.user.userId);
     const navigate = useNavigate();
@@ -144,4 +144,4 @@ const Threads = () => {
     );
 };
 
-export default Threads;
+export default Thread;

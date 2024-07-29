@@ -4,12 +4,13 @@ import Register from "../../pages/Register";
 import Login from "../../pages/Login";
 import MainLayout from "../Layout/MainLayout";
 import Categories from "../../pages/Categories";
-import Threads from "../../pages/Thread/Threads";
+import Thread from "../../pages/Thread/Thread";
 import NotFound from "../../pages/NotFound";
 import PostThread from "../../pages/Thread/PostThread";
 import About from "../../pages/About";
 import Contact from "../../pages/Contact";
 import ForgotPassword from "../../pages/ForgotPassword";
+import Threads from "../../pages/Threads";
 
 const MainRoutes = () => {
   const routes = useRoutes([
@@ -24,10 +25,11 @@ const MainRoutes = () => {
         {
           path: "thread",
           children: [
-            { path: ":threadId", element: <Threads /> }, // Remove leading slash
-            { path: "new", element: <PostThread /> }, // Remove leading slash
+            { path: ":threadId", element: <Thread /> }, 
+            { path: "new", element: <PostThread /> }, 
           ],
         },
+        { path: "threads", element: <Threads /> },
         { path: "*", element: <NotFound /> },
       ],
     },

@@ -9,7 +9,7 @@ const LatestThreads = () => {
     const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
     useEffect(() => {
-        fetchThreads();
+        fetchThreads(); 
     }, [JSON.stringify(threads)]);
 
     async function fetchThreads() {
