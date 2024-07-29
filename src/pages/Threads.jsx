@@ -92,14 +92,23 @@ const Threads = () => {
                 )}
 
                 <div className="flex justify-between mt-8">
-                    {(page !==1) &&<button
+                    {(page !==1)?   <button
                         onClick={() => setPage(prevPage => Math.max(prevPage - 1, 1))}
                         disabled={page === 1}
                         className="flex items-center bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-md transition duration-300 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                         <ArrowLeft className="w-4 h-4 mr-2" />
                         Previous
-                    </button>}
+                    </button> : 
+                        <button
+                        onClick={() => setPage(prevPage => Math.max(prevPage - 1, 1))}
+                        disabled={page === 1}
+                        className="flex disabled items-center bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-md transition duration-300 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                        <ArrowLeft className="w-4 h-4 mr-2" />
+                        Previous
+                    </button>
+                    }
                     {(threads.length === 10) &&<button
                         onClick={() => setPage(prevPage => prevPage + 1)}
                         className="flex items-center bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-md transition duration-300 ease-in-out"
