@@ -2,6 +2,7 @@ import React from 'react';
 import { MessageSquare, Eye } from 'lucide-react';
 
 const ThreadCard = ({ thread, isLast }) => {
+    console.log(isLast)
     return (
         <div className={`p-6 transition duration-300 ease-in-out hover:bg-gray-700 ${!isLast && 'border-b border-gray-700'}`}>
             <div className="flex items-center justify-between mb-2">

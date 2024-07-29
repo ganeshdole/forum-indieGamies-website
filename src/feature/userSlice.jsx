@@ -9,7 +9,6 @@ export const categoriesSlice = createSlice({
     initialState,
     reducers: {
         addUser: (state, action) => {
-            console.log(action.payload)
             state.userId = action.payload;
         },
         removeUser: (state) => {

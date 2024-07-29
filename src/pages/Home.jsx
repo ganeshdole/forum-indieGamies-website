@@ -18,18 +18,24 @@ const Home = () => {
                     <p className="font-teko text-xl text-white mb-10 uppercase" style={{ fontFamily: "Teko-Medium" }}>
                         Connect, discuss, and level up your gaming experience
                     </p>
+                <div className="flex justify-center space-x-4 mb-8">
                     {!token && (
-                        <div className="space-x-4">
-                            <button
-                                className="bg-blue-600 hover:bg-blue-700 text-white font-inter font-semibold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50"
-                                onClick={() => navigate("/register")}
-                            >
-                                Join the Discussion
-                            </button>
-                        </div>
+                        <button 
+                            onClick={() => navigate("/register")}
+                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        >
+                            Join the Discussion
+                        </button>
                     )}
+                    <button 
+                        onClick={() => navigate("/threads")}
+                        className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                    >
+                        Explore Threads
+                    </button>
                 </div>
-            </section>
+            </div>
+        </section>
             <main>
                 <CategoriesList />
                 <LatestThreads />
