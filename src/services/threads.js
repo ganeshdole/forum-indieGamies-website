@@ -1,15 +1,18 @@
 import axios  from "axios";
 import { createError, createUrl } from "./utils";
 
-export async function getAllThreads(){
+export async function getThreads( page=1, limit = 10 ){
     try{
-        const result = await axios(createUrl('threads'),{});
+        const url  = new URLSearchParams({page, limit}) 
+        const result = await axios(createUrl(`threads?${url.toString()}`),{});
         return result.data;
     }catch(error){
         console.log(error);
         return createError(error);
+
     }
 }
+
 export async function getThreadById(threadId){
     try{
         const result = await axios(createUrl(`threads/thread/${threadId}`))
@@ -59,3 +62,17 @@ export async function updateThread(threadId, newThread){
     }
 }
 
+export async function deleteThread(threadId, token){
+    try{
+        const headers = {
+            token 
+        }
+        console.log(token)
+        const result = await axios.delete(createUrl(`threads/delete/${threadId}`), {headers})
+        console.log(result.data)
+        return result.data
+    }catch(error){
+        console.log(error)
+        return createError(error);
+    }
+}

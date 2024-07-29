@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Loader, Plus, RefreshCw } from 'lucide-react';
-import { getAllThreads } from '../../services/threads';
+import { getThreads } from '../../services/threads';
 import ThreadCard from './ThreadCard';
 import { useNavigate } from 'react-router-dom';
 
@@ -9,13 +9,13 @@ const LatestThreads = () => {
     const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
     useEffect(() => {
-        fetchThreads();
+        fetchThreads(); 
     }, [JSON.stringify(threads)]);
 
     async function fetchThreads() {
         setIsLoading(true);
         try {
-            const response = await getAllThreads();
+            const response = await getThreads();
             if (response.status === 'success') {
                 setThreads(response.data);
             } else {
